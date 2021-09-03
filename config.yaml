@@ -8,13 +8,12 @@ params:
   banner:
     buttonText: Get Started
     subtitle: |-
-      A RESPONSIVE SITE TEMPLATE DESIGNED BY HTML5 UP
-      AND RELEASED UNDER THE CREATIVE COMMONS.
-    title: Hi, my name is Tanisha 
+      My Portfolio Website
+    title: Hi, My name is Tanisha 
   blog: {}
   contact:
     address:
-      - city: London, ST 00000
+      - city: London, ST NW1 5AH
         country: United Kingdom
         street: Gloucester Place
         title: Address
@@ -25,7 +24,7 @@ params:
         title: Email
     enable: yes
     phone:
-      - phone: (000) 000-0000 x1234
+      - phone: (+44) 7880333616
         title: Phone
   custom_css: []
   custom_js: []
@@ -44,16 +43,16 @@ params:
     social:
       - icon: fa-twitter
         label: Twitter
-        url: https://www.twitter.com
+        url: #
       - icon: fa-facebook
         label: Facebook
-        url: https://www.facebook.com
+        url: #
       - icon: fa-instagram
         label: Instagram
-        url: https://www.instagram.com
+        url: #
       - icon: fa-github
         label: GitHub
-        url: https://www.github.com
+        url: https://github.com/tayadav
       - icon: fa-linkedin
         label: LinkedIn
         url: https://www.linkedin.com/in/tanisha-yadav-04b27817b/
@@ -81,9 +80,9 @@ params:
   tiles:
     enable: yes
     showcase:
-      - image: pic01.jpg
-        subtitle: Ipsum Dolor Sit Amet
-        title: Aliquam
+      - image: IMG_6654_Original.jpg
+        subtitle: MAM'22, London Business School  
+        title: Biography  
         url: blogs/aliquam
       - image: pic02.jpg
         subtitle: Feugiat Amet Tempus
