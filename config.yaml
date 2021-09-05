@@ -85,8 +85,8 @@ params:
         title: Biography  
         url: blogs/aliquam
       - image: pic02.jpg
-        subtitle: Feugiat Amet Tempus
-        title: Tempus
+        subtitle: the whole project 
+        title: r project
         url: blogs/tempus
       - image: pic03.jpg
         subtitle: Lorem Etiam Nullam
