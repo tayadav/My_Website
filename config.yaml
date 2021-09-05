@@ -41,15 +41,15 @@ params:
         text: 'Design: '
         url: https://www.html5up.net
     social:
-      - icon: fa-twitter
-        label: Twitter
-        url: #
-      - icon: fa-facebook
-        label: Facebook
-        url: #
-      - icon: fa-instagram
-        label: Instagram
-        url: #
+#      - icon: fa-twitter
+#        label: Twitter
+#        url: https://www.twitter.com
+#      - icon: fa-facebook
+#        label: Facebook
+#        url: https://www.facebook.com
+#      - icon: fa-instagram
+#        label: Instagram
+#        url: https://www.instagram.com
       - icon: fa-github
         label: GitHub
         url: https://github.com/tayadav
@@ -83,7 +83,7 @@ params:
       - image: IMG_6654_Original.jpg
         subtitle: MAM'22, London Business School  
         title: Biography  
-        url: blogs/aliquam
+        url: blogs/tanisha
       - image: lbs.jpg
         subtitle: the whole project 
         title: r project
