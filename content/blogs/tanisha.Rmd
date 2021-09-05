@@ -10,8 +10,8 @@ description: Nullam et orci eu lorem consequat tincidunt vivamus et sagittis mag
 draft: false
 image: lbs.jpg
 keywords: ""
-slug: tempus
-title: Tempus
+slug: tanisha
+title: Tanisha
 ---
 
 
@@ -22,54 +22,6 @@ library(gapminder)  # gapminder dataset
 library(here)
 library(janitor)
 ```
-
-## Practice using Markdown
-
-Written assignments will be submitted using
-[Markdown](https://daringfireball.net/projects/markdown/). Markdown is a
-lightweight text formatting language that easily converts between file
-formats. It is integrated directly into [R
-Markdown](http://rmarkdown.rstudio.com/), which combines R code, output,
-and written text into a single document (`.Rmd`).
-
-There is a very nice [Markdwown
-tutorial](https://commonmark.org/help/tutorial/) that I suggest you go
-through before working on your assignment. If you want to use a
-stand-alone Markdown editor [Typora](https://typora.io/) is a
-lightweight Markdown editor that inherently supports pandoc-flavored
-Markdown.
-
-## Pandoc
-
-[Pandoc](http://pandoc.org)is a program that converts Markdown files
-into basically anything else. It was created by [John
-MacFarlane](https://johnmacfarlane.net), a philosophy professor at the
-University of California, Berkeley and is widely used as a writing tool
-and as a basis for publishing workflow. Kieran Healy's [Plain Text
-Social Science workflow](http://plain-text.co) describes how to use
-Markdown and then convert your Markdown document to HTML, PDF, word,
-etc.
-
-You should create a file whose name will be `your_name.Rmd`, so if I
-were submitting, my file would be called `Kostis_Christodoulou.Rmd`
-
-# Task 1: Short biography written using markdown
-
-You should write within this Rmd file a brief biography of yourself
-using markdown syntax. I know you have already achieved a lot, but a
-couple of paragraphs is more than enough.
-
-To achieve full marks, you should include at least 4 of the following
-elements:
-
--   Headers
--   Emphasis (italics or bold)
--   Lists
--   Links
--   Embedding images
-
-> Please delete all the intro text I wrote from line 22 to line 69 and
-> start writing your short biography after this blockquote.
 
 ## Hello!
 
@@ -190,118 +142,6 @@ However, the life expectancy in Africa remained almost the same post
 1990 with one outlier in 1991. For rest of the continents, the life
 expectancy has increased since 1952 though we can see lot of outliers in
 Asia and Europe.
-
-# Task 3: Brexit vote analysis
-
-We will have a look at the results of the 2016 Brexit vote in the UK.
-First we read the data using `read_csv()` and have a quick glimpse at
-the data
-
-```{r load_brexit_data, warning=FALSE, message=FALSE}
-brexit_results <- read_csv(here::here("data","brexit_results.csv"))
-
-
-glimpse(brexit_results)
-```
-
-The data comes from [Elliott Morris](https://www.thecrosstab.com/), who
-cleaned it and made it available through his [DataCamp class on
-analysing election and polling data in
-R](https://www.datacamp.com/courses/analyzing-election-and-polling-data-in-r).
-
-Our main outcome variable (or y) is `leave_share`, which is the percent
-of votes cast in favour of Brexit, or leaving the EU. Each row is a UK
-[parliament
-constituency](https://en.wikipedia.org/wiki/United_Kingdom_Parliament_constituencies).
-
-To get a sense of the spread, or distribution, of the data, we can plot
-a histogram, a density plot, and the empirical cumulative distribution
-function of the leave % in all constituencies.
-
-```{r brexit_histogram, warning=FALSE, message=FALSE}
-
-# histogram
-brexit_histogram <- ggplot(brexit_results, aes(x = leave_share)) +
-  geom_histogram(binwidth = 2.5)
-
-brexit_histogram <- brexit_histogram +
-labs(title = "Brexit Leave Share",
-     x = "leave share") +
-NULL
-
-# density plot-- think smoothed histogram
-brexit_density_plot <- ggplot(brexit_results, aes(x = leave_share)) +
-  geom_density()
-brexit_density_plot<- brexit_density_plot +
-  labs(title = "Brexit Density Plot",
-       x = "Leave Share") +
-  NULL
-
-# The empirical cumulative distribution function (ECDF) 
-brexit_cum_dis <- ggplot(brexit_results, aes(x = leave_share)) +
-  stat_ecdf(geom = "step", pad = FALSE) +
-  scale_y_continuous(labels = scales::percent)
-brexit_cum_dis <- brexit_cum_dis +
-  labs(title = "Brexit Cummulative Distribution",
-       x = "leave Share")+
-  NULL
-
-
-```
-
-One common explanation for the Brexit outcome was fear of immigration
-and opposition to the EU's more open border policy. We can check the
-relationship (or correlation) between the proportion of native born
-residents (`born_in_uk`) in a constituency and its `leave_share`. To do
-this, let us get the correlation between the two variables
-
-```{r brexit_immigration_correlation}
-brexit_results %>% 
-  select(leave_share, born_in_uk) %>% 
-  cor()
-```
-
-The correlation is almost 0.5, which shows that the two variables are
-positively correlated.
-
-We can also create a scatterplot between these two variables using
-`geom_point`. We also add the best fit line, using
-`geom_smooth(method = "lm")`.
-
-```{r brexit_immigration_plot}
-brexit_immigration_plot <- ggplot(brexit_results, aes(x = born_in_uk, y = leave_share)) +
-  geom_point(alpha=0.3) +
-  
-  # add a smoothing line, and use method="lm" to get the best straight-line
-  geom_smooth(method = "lm") + 
-  
-  # use a white background and frame the plot with a black box
-  theme_bw() +
-  NULL
-brexit_immigration_plot <- brexit_immigration_plot +
-  labs(title = "Correlation Between native residents and their leave share",
-       x = "born in UK",
-       y = "leave share") +
-  NULL
-
-```
-
-You have the code for the plots, I would like you to revisit all of them
-and use the `labs()` function to add an informative title, subtitle, and
-axes titles to all plots.
-
-What can you say about the relationship shown above? Again, don't just
-say what's happening in the graph. Tell some sort of story and speculate
-about the differences in the patterns.
-
-> Type your answer after, and outside, this blockquote.
-
-Looking at the graphs and plots, we can say there is positive
-correlation between people born in Uk and its leave share. Graph implies
-about 50% of the native residents were supporting Brexit. There might be
-a possibility people in areas where migration rate is low have higher
-proportion of leave voters compared to areas with high migration rate.
-So, immigration could be a major factor impacting the brexit result.
 
 # Task 4: Animal rescue incidents attended by the London Fire Brigade
 
