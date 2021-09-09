@@ -1,15 +1,14 @@
 ---
-title: "Tanisha"
-date: '2017-10-31T22:26:13-05:00'
-description: Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna
-  sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa
-  sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem
-  consequat tincidunt. Vivamus et sagittis tempus.
-draft: no
-image: lbs.jpg
-keywords: ''
-slug: tanisha
 categories:
+- ""
+- ""
+date: "2017-10-31T22:26:09-05:00"
+description: Lorem Etiam Nullam
+draft: false
+image: lbs.jpg
+keywords: ""
+slug: tanisha
+title: "Tanisha"
 ---
 
 Born and brought up in Delhi, the capital on India.I am reading for the Masters in Analytics and Management degree at London Business School and wish to undertake a career in tech, and more specifically in either Fintech or in music tech. 
