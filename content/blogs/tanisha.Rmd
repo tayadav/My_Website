@@ -11,12 +11,33 @@ slug: tanisha
 title: Tanisha
 ---
 
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75,
+  fig.height=6.75,
+  fig.align = "center"
+)
+```
 Born and brought up in Delhi, the capital on India.I am reading for the Masters in Analytics and Management degree at London Business School and wish to undertake a career in tech, and more specifically in either Fintech or in music tech. 
 
 Having worked at the *BlackRock India* Investment Accounting business (IAG) for over two years straight out of university, I developed a broad understanding of financial world and clients. I also had the opportunity to understand deep implication of the data
 analytics on the finance industry. Over these two years with the firm, I became a critical resource of the team and gained a reputation of being proactive, quick learner and a team player.
 
 At LBS, besides achieving my professional goals, I am very keen on meeting people from all over the world and exploring new places. Outside of the academic and professional framework, I love playing badminton (I do not know where you are reading this from) and squash.
+
+
+Here below is my CV, and feel free to reach out:
+ 
+```{r, echo=FALSE, fig.width=3,fig.height=3}
+knitr::include_graphics("static/img/blogs/tanishacv.jpg",error=FALSE)
+```
 
 
 
