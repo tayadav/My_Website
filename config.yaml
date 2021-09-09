@@ -8,7 +8,7 @@ params:
   banner:
     buttonText: Get Started
     subtitle: |-
-      My Portfolio Website
+      Welcome to my website. I'll be sharing a little bit about myself and a lot about my work
     title: Hi, My name is Tanisha 
   blog: {}
   contact:
@@ -24,7 +24,7 @@ params:
         title: Email
     enable: yes
     phone:
-      - phone: (+44) 7880333616
+      - phone: (+44) 7880333618
         title: Phone
   custom_css: []
   custom_js: []
@@ -82,7 +82,7 @@ params:
     showcase:
       - image: IMG_6654_Original.jpg
         subtitle: MAM'22, London Business School  
-        title: Biography  
+        title: Who am I  
         url: blogs/tanisha
       - image: lbs.jpg
         subtitle: the whole project 
