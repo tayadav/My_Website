@@ -3,12 +3,12 @@ categories:
 - ""
 - ""
 date: "2017-10-31T22:26:09-05:00"
-description: Lorem Etiam Nullam
+description: fhhfushfihsijdhwhdiwhdi
 draft: false
 image: lbs.jpg
 keywords: ""
 slug: tanisha
-title: "Tanisha"
+title: Tanisha
 ---
 
 Born and brought up in Delhi, the capital on India.I am reading for the Masters in Analytics and Management degree at London Business School and wish to undertake a career in tech, and more specifically in either Fintech or in music tech. 
