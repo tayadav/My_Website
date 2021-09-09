@@ -88,9 +88,9 @@ params:
         subtitle: Social Media 
         title: Connected World
         url: blogs/tempus
-      - image: pic03.jpg
-        subtitle: Lorem Etiam Nullam
-        title: Magna
+      - image: biden.jpg
+        subtitle: Biden's Popularity
+        title: Joe Biden
         url: blogs/magna
       - image: pic04.jpg
         subtitle: Nisl Sed Aliquam
