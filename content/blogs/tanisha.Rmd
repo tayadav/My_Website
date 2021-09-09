@@ -36,7 +36,7 @@ At LBS, besides achieving my professional goals, I am very keen on meeting peopl
 Here below is my CV, and feel free to reach out:
  
 ```{r, echo=FALSE, fig.width=3,fig.height=3}
-knitr::include_graphics("static/img/blogs/tanishacv.jpg",error=FALSE)
+knitr::include_graphics("static/img/blogs/tanishacv.png",error=FALSE)
 ```
 
 
