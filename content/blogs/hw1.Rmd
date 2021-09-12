@@ -11,3 +11,60 @@ slug: tempus
 title: tempus
 ---
 
+In the assignment we analyzed data from the 2016 GSS sample data, using it to estimate values of population parameters of interest about US adults. The GSS sample data file has 2867 observations of 935 variables, but we are only interested in very few of these variables and we are using a smaller file.
+
+The General Social Survey (GSS) gathers data on American society in order to monitor and explain trends in attitudes, behaviors, and attributes. Many trends have been tracked for decades, so one can see the evolution of attitudes, etc in American Society.
+```{r}
+#read data
+gss <- read_csv(here::here("data", "smallgss2016.csv"), 
+                na = c("", "Don't know",
+                       "No answer", "Not applicable"))
+
+glimpse(gss)
+```
+**Instagram and Snapchat, by sex**
+```{r}
+#Creating a new variable 'Snap_Insta'
+snap_insta <- gss %>%
+  mutate(snap_insta = if_else(snapchat == "NA" & instagrm == "NA", "NA", 
+                              if_else(snapchat=="Yes" | instagrm == "Yes", "Yes", "No")))
+
+snap_insta
+```
+
+```{r}
+#Calculating proportion of 'snap_insta' users
+snap_insta %>%
+  filter(snap_insta != "NA") %>%
+  summarize(
+    Proportion_Insta_Snap = count(snap_insta =="Yes")/ n())
+
+
+# CI for Male population
+male_proportion <- snap_insta %>%
+  filter(sex == "Male", snap_insta != "NA") %>%
+  summarize(
+    proportion = count(snap_insta == "Yes")/n(),
+    se = sqrt((proportion*(1 - proportion)/n())),
+    lower_ci = proportion - 1.96*se, #we are using normal distribution to approximate
+                                     #binomial distribution and directly use 1.96 as the critical value
+    upper_ci = proportion + 1.96*se) %>% 
+  knitr::kable(caption = "95% CI for men who used either Snapchat or Instagram") %>%
+  kableExtra::kable_styling()
+
+# CI for Female population
+female_proportion <- snap_insta %>%
+  filter(sex == "Female", snap_insta != "NA") %>%
+  summarize(
+    proportion = count(snap_insta == "Yes")/n(),
+    se = sqrt((proportion*(1 - proportion)/n())),
+    lower_ci = proportion - 1.96*se,
+    upper_ci = proportion + 1.96*se) %>% 
+  knitr::kable(caption = "95% CI for women who used either Snapchat or Instagram") %>%
+  kableExtra::kable_styling()
+
+#print
+male_proportion
+female_proportion
+```
+
