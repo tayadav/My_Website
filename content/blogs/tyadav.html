@@ -5,12 +5,105 @@ categories:
 date: "2017-10-31T22:26:09-05:00"
 description: fhhfushfihsijdhwhdiwhdi
 draft: false
-image: biden.jpg
+image: USelections.jpeg
 keywords: ""
 slug: magna
-title: magna
+title: US Elections
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
+<p><strong>Biden’s Approval Margins</strong></p>
+<pre class="r"><code># Imported approval polls data directly off fivethirtyeight website
+approval_polllist &lt;- read_csv(&#39;https://projects.fivethirtyeight.com/biden-approval-data/approval_polllist.csv&#39;) </code></pre>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   .default = col_character(),
+##   samplesize = col_double(),
+##   weight = col_double(),
+##   influence = col_double(),
+##   approve = col_double(),
+##   disapprove = col_double(),
+##   adjusted_approve = col_double(),
+##   adjusted_disapprove = col_double(),
+##   tracking = col_logical(),
+##   poll_id = col_double(),
+##   question_id = col_double()
+## )
+## ℹ Use `spec()` for the full column specifications.</code></pre>
+<pre class="r"><code>glimpse(approval_polllist)</code></pre>
+<pre><code>## Rows: 1,596
+## Columns: 22
+## $ president           &lt;chr&gt; &quot;Joseph R. Biden Jr.&quot;, &quot;Joseph R. Biden Jr.&quot;, &quot;Jos…
+## $ subgroup            &lt;chr&gt; &quot;All polls&quot;, &quot;All polls&quot;, &quot;All polls&quot;, &quot;All polls&quot;…
+## $ modeldate           &lt;chr&gt; &quot;9/13/2021&quot;, &quot;9/13/2021&quot;, &quot;9/13/2021&quot;, &quot;9/13/2021&quot;…
+## $ startdate           &lt;chr&gt; &quot;1/26/2021&quot;, &quot;1/26/2021&quot;, &quot;1/21/2021&quot;, &quot;1/27/2021&quot;…
+## $ enddate             &lt;chr&gt; &quot;1/28/2021&quot;, &quot;1/28/2021&quot;, &quot;2/2/2021&quot;, &quot;1/29/2021&quot;,…
+## $ pollster            &lt;chr&gt; &quot;Rasmussen Reports/Pulse Opinion Research&quot;, &quot;Morni…
+## $ grade               &lt;chr&gt; &quot;B&quot;, &quot;B&quot;, &quot;B+&quot;, &quot;A+&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B+&quot;, &quot;B&quot;, &quot;B…
+## $ samplesize          &lt;dbl&gt; 1500.00, 9211.50, 906.00, 1261.00, 15000.00, 2200.…
+## $ population          &lt;chr&gt; &quot;lv&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;rv&quot;, &quot;lv&quot;, &quot;l…
+## $ weight              &lt;dbl&gt; 0.33818752, 0.17530817, 1.31470660, 2.35547250, 0.…
+## $ influence           &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ approve             &lt;dbl&gt; 50.00000, 55.00000, 57.00000, 53.00000, 54.00000, …
+## $ disapprove          &lt;dbl&gt; 45.0, 31.5, 37.0, 29.0, 32.0, 33.0, 33.0, 39.0, 46…
+## $ adjusted_approve    &lt;dbl&gt; 52.41421, 53.59398, 56.36462, 53.38649, 52.59398, …
+## $ adjusted_disapprove &lt;dbl&gt; 39.04493, 34.74316, 36.35949, 33.12220, 35.24316, …
+## $ multiversions       &lt;chr&gt; NA, &quot;*&quot;, NA, NA, NA, NA, &quot;*&quot;, NA, NA, NA, NA, NA, …
+## $ tracking            &lt;lgl&gt; TRUE, TRUE, NA, NA, TRUE, NA, TRUE, NA, TRUE, NA, …
+## $ url                 &lt;chr&gt; &quot;https://www.rasmussenreports.com/public_content/p…
+## $ poll_id             &lt;dbl&gt; 74290, 74292, 74344, 74321, 74339, 74378, 74323, 7…
+## $ question_id         &lt;dbl&gt; 139515, 139518, 139651, 139560, 139644, 139765, 13…
+## $ createddate         &lt;chr&gt; &quot;1/29/2021&quot;, &quot;2/1/2021&quot;, &quot;2/4/2021&quot;, &quot;2/1/2021&quot;, &quot;…
+## $ timestamp           &lt;chr&gt; &quot;13:13:08 13 Sep 2021&quot;, &quot;13:13:08 13 Sep 2021&quot;, &quot;1…</code></pre>
+<pre class="r"><code>#Using `lubridate` to fix dates, as they are given as characters.
+approval_polllist &lt;- approval_polllist %&gt;% 
+  mutate(enddate = mdy(enddate))</code></pre>
+<p><em>What I did is to calculate the average net approval rate (approve- disapprove) for each week since he got into office. I plot the net approval, along with its 95% confidence interval. There are various dates given for each poll, I used <code>enddate</code>, i.e., the date the poll ended.</em></p>
+<pre class="r"><code>#tidy data and calculate CI using formula
+net_approval &lt;- approval_polllist %&gt;% 
+  filter(!is.na(subgroup)) %&gt;%
+  #using lubridate to get week number
+  mutate(week = isoweek(enddate),
+         net_approval_day = approve - disapprove) %&gt;% 
+  group_by(subgroup, week) %&gt;%
+  summarise(mean_net_approval = mean(net_approval_day),
+            sd_net_approval = sd(net_approval_day),
+            count = n(),
+            se_twitter = sd_net_approval / sqrt(count),
+            t_critical = qt(0.975, count - 1),
+            lower_ci =  mean_net_approval - t_critical*se_twitter,
+            upper_ci = mean_net_approval + t_critical*se_twitter)</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;subgroup&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>#plot Biden&#39;s weekly net approval rate
+ggplot(net_approval, 
+       aes(x= week, 
+           y= mean_net_approval)) +
+  geom_line(color = &quot;red&quot;)+
+  geom_point(color = &quot;red&quot;)+
+  geom_smooth(color = &quot;blue&quot;,
+              level = 0,
+              size = 1)+
+  #add orange line at zero
+  geom_hline(yintercept=0, 
+             color = &quot;orange&quot;, 
+             size = 2)+
+  theme_bw()+
+  #add confidence band using calculated CI
+  geom_ribbon(aes(ymin = lower_ci, 
+                  ymax = upper_ci),
+              alpha=0.3,
+              fill = &quot;grey&quot;,
+              color = &quot;red&quot;) + 
+  labs(
+    title = &quot;Estimating Approval Margin (approve-disapprove) for Joe Biden&quot;,
+    subtitle = &quot;Weekly average of all polls by different subgroups&quot;,
+    x = &quot;Week of the year&quot;,
+    y = &quot;Average Approval Margin (approve-disapprove)&quot;)+
+  #differentiate between Adults, All polls, Voters 
+  facet_wrap(vars(subgroup))+
+  scale_y_continuous(breaks=seq(-15,10,2.5))</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/blogs/tyadav_files/figure-html/Biden%20net%20approval%20rate%20plot-1.png" width="1344" style="display: block; margin: auto;" /></p>
