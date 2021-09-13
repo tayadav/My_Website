@@ -10,7 +10,7 @@ keywords: ""
 slug: ipsum
 title: Happiness
 ---
-```{r}
+```{r load-libraries, warning=FALSE,message=FALSE,echo=FALSE}
 library(tidyverse)
 library(broom)
 library(GGally)
@@ -29,13 +29,13 @@ url <- "https://happiness-report.s3.amazonaws.com/2021/DataPanelWHR2021C2.xls"
 ```
 
 
-```{r downloading data}
+```{r downloading data, warning=FALSE}
 # Download data to temporary file
 httr::GET(url, write_disk(happiness.temp <- tempfile(fileext = ".xls")))
 ```
 
 
-```{r read csv}
+```{r read csv, warning=FALSE}
 # Using read_excel to read it as dataframe
 world_happiness <- read_excel(happiness.temp,
                     sheet = "Sheet1",
@@ -47,7 +47,7 @@ glimpse(world_happiness)
 
 ```
 
-```{r}
+```{r plotting graph, warning=FALSE}
 # Scatterplot-correlation matrix for 2019 using GGally::ggpairs()
 world_happiness_19 <- world_happiness %>%
   filter(year==2019) 
@@ -57,7 +57,7 @@ world_happiness_19 %>%
   ggpairs(alpha = 0.3)
 ```
 
-```{r}
+```{r Statistics, warning=FALSE}
 # Summary statistics for life_ladder, a measure of happiness score
 world_happiness_19 %>% 
   select(life_ladder) %>% 
@@ -65,7 +65,7 @@ world_happiness_19 %>%
 ```
 
 
-```{r}
+```{r creating models, warning=FALSE}
 # fit 3 models, with model1 being just the average happiness
 model1 <- lm(life_ladder ~ 1, data = world_happiness_19)
 mosaic::msummary(model1)

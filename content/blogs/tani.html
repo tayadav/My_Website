@@ -14,65 +14,15 @@ title: Happiness
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
-<pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-## ✓ tibble  3.1.2     ✓ dplyr   1.0.7
-## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
-## ✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(broom)
-library(GGally)</code></pre>
-<pre><code>## Warning: package &#39;GGally&#39; was built under R version 4.1.1</code></pre>
-<pre><code>## Registered S3 method overwritten by &#39;GGally&#39;:
-##   method from   
-##   +.gg   ggplot2</code></pre>
-<pre class="r"><code>library(here)</code></pre>
-<pre><code>## here() starts at /Users/tani/Downloads/My_Website</code></pre>
-<pre class="r"><code>library(httr)
-library(readxl)
-library(janitor)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;janitor&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     chisq.test, fisher.test</code></pre>
-<pre class="r"><code>library(huxtable)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;huxtable&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:GGally&#39;:
-## 
-##     wrap</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     add_rownames</code></pre>
-<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
-## 
-##     theme_grey</code></pre>
-<pre class="r"><code>library(skimr)
-library(car)</code></pre>
-<pre><code>## Loading required package: carData</code></pre>
-<pre><code>## 
-## Attaching package: &#39;car&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     recode</code></pre>
-<pre><code>## The following object is masked from &#39;package:purrr&#39;:
-## 
-##     some</code></pre>
-<pre class="r"><code>library(ggfortify)</code></pre>
-<pre><code>## Warning: package &#39;ggfortify&#39; was built under R version 4.1.1</code></pre>
 <pre class="r"><code>url &lt;- &quot;https://happiness-report.s3.amazonaws.com/2021/DataPanelWHR2021C2.xls&quot;</code></pre>
 <pre class="r"><code># Download data to temporary file
 httr::GET(url, write_disk(happiness.temp &lt;- tempfile(fileext = &quot;.xls&quot;)))</code></pre>
 <pre><code>## Response [https://happiness-report.s3.amazonaws.com/2021/DataPanelWHR2021C2.xls]
-##   Date: 2021-09-13 18:29
+##   Date: 2021-09-13 18:41
 ##   Status: 200
 ##   Content-Type: application/vnd.ms-excel
 ##   Size: 435 kB
-## &lt;ON DISK&gt;  /var/folders/1k/wft4clgd33qdzxt_l3hlsfqh0000gn/T//RtmpcjPlff/filecad75de86d.xls</code></pre>
+## &lt;ON DISK&gt;  /var/folders/1k/wft4clgd33qdzxt_l3hlsfqh0000gn/T//Rtmpl7ew62/filed1651047a07.xls</code></pre>
 <pre class="r"><code># Using read_excel to read it as dataframe
 world_happiness &lt;- read_excel(happiness.temp,
                     sheet = &quot;Sheet1&quot;,
@@ -101,140 +51,13 @@ world_happiness_19 &lt;- world_happiness %&gt;%
 world_happiness_19 %&gt;% 
   select(-c(country_name,year)) %&gt;% 
   ggpairs(alpha = 0.3)</code></pre>
-<pre><code>## Warning in warn_if_args_exist(list(...)): Extra arguments: &#39;alpha&#39; are being
-## ignored. If these are meant to be aesthetics, submit them using the &#39;mapping&#39;
-## variable within ggpairs with ggplot2::aes or ggplot2::aes_string.</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 6 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 5 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removing 1 row that contained a missing value</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 7 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 8 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removing 1 row that contained a missing value
-
-## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removing 1 row that contained a missing value</code></pre>
-<pre><code>## Warning: Removed 6 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 6 rows containing non-finite values (stat_density).</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 6 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 8 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 7 rows containing missing values
-
-## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 7 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 14 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 7 rows containing missing values
-
-## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 7 rows containing missing values</code></pre>
-<pre><code>## Warning: Removed 6 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 5 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removing 1 row that contained a missing value</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 7 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 8 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removing 1 row that contained a missing value
-
-## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removing 1 row that contained a missing value</code></pre>
-<pre><code>## Warning: Removed 5 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 8 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 5 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 5 rows containing non-finite values (stat_density).</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 6 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 9 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 13 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 6 rows containing missing values
-
-## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 6 rows containing missing values</code></pre>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 7 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 6 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_density).</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 8 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 9 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 2 rows containing missing values
-
-## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 2 rows containing missing values</code></pre>
-<pre><code>## Warning: Removed 7 rows containing missing values (geom_point).
-
-## Warning: Removed 7 rows containing missing values (geom_point).
-
-## Warning: Removed 7 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 9 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 8 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 7 rows containing non-finite values (stat_density).</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 15 rows containing missing values</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 8 rows containing missing values
-
-## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 8 rows containing missing values</code></pre>
-<pre><code>## Warning: Removed 8 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 14 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 8 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 13 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 9 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 15 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 8 rows containing non-finite values (stat_density).</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 8 rows containing missing values
-
-## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removed 8 rows containing missing values</code></pre>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 7 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 6 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 8 rows containing missing values (geom_point).
-
-## Warning: Removed 8 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_density).</code></pre>
-<pre><code>## Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-## Removing 1 row that contained a missing value</code></pre>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 7 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 6 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 8 rows containing missing values (geom_point).
-
-## Warning: Removed 8 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_density).</code></pre>
-<p><img src="/blogs/tani_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/blogs/tani_files/figure-html/plotting%20graph-1.png" width="672" /></p>
 <pre class="r"><code># Summary statistics for life_ladder, a measure of happiness score
 world_happiness_19 %&gt;% 
   select(life_ladder) %&gt;% 
   skim()</code></pre>
 <table>
-<caption><span id="tab:unnamed-chunk-3">Table 1: </span>Data summary</caption>
+<caption><span id="tab:Statistics">Table 1: </span>Data summary</caption>
 <tbody>
 <tr class="odd">
 <td align="left">Name</td>
@@ -362,7 +185,7 @@ mosaic::msummary(model5)</code></pre>
 <pre class="r"><code># if you want regression summary in tibble format, use broom::tidy() and broom::glance()
 # get model summary and R2, etc for both models
 model2 %&gt;% broom::tidy(conf.int = TRUE)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-4">
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:creating models">
 <col><col><col><col><col><col><col><tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">term</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">estimate</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">std.error</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">statistic</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">p.value</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">conf.low</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">conf.high</th></tr>
 <tr>
@@ -372,7 +195,7 @@ model2 %&gt;% broom::tidy(conf.int = TRUE)</code></pre>
 </table>
 
 <pre class="r"><code>model2 %&gt;% broom::glance()</code></pre>
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-4">
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:creating models">
 <col><col><col><col><col><col><col><col><col><col><col><col><tr>
 <th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">r.squared</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">adj.r.squared</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">sigma</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">statistic</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">p.value</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">df</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">logLik</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">AIC</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">BIC</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">deviance</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">df.residual</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">nobs</th></tr>
 <tr>
@@ -380,7 +203,7 @@ model2 %&gt;% broom::tidy(conf.int = TRUE)</code></pre>
 </table>
 
 <pre class="r"><code>model3 %&gt;% broom::tidy(conf.int = TRUE)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-4">
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:creating models">
 <col><col><col><col><col><col><col><tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">term</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">estimate</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">std.error</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">statistic</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">p.value</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">conf.low</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">conf.high</th></tr>
 <tr>
@@ -392,7 +215,7 @@ model2 %&gt;% broom::tidy(conf.int = TRUE)</code></pre>
 </table>
 
 <pre class="r"><code>model3 %&gt;% broom::glance()</code></pre>
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-4">
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:creating models">
 <col><col><col><col><col><col><col><col><col><col><col><col><tr>
 <th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">r.squared</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">adj.r.squared</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">sigma</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">statistic</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">p.value</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">df</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">logLik</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">AIC</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">BIC</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">deviance</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">df.residual</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">nobs</th></tr>
 <tr>
@@ -409,7 +232,7 @@ huxreg(model1, model2, model3, model4,model5,
        stars = NULL
 ) %&gt;% 
   set_caption(&#39;Comparison of models&#39;)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-4">
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:creating models">
 <caption style="caption-side: top; text-align: center;">Comparison of models</caption><col><col><col><col><col><col><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(1)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(2)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(3)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(4)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(5)</th></tr>
 <tr>
