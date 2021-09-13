@@ -1,0 +1,94 @@
+---
+categories:
+- ""
+- ""
+date: "2017-10-31T22:26:09-05:00"
+description: fhhfushfihsijdhwhdiwhdi
+draft: false
+image: beer.jpg
+keywords: ""
+slug: etiam
+title: Beer, Wine and Spirits
+---
+```{r load-libraries, warning=FALSE, message=FALSE, echo=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(lubridate)
+library(fivethirtyeight)
+library(here)
+library(skimr)
+library(janitor)
+library(vroom)
+library(tidyquant)
+library(rvest) # to scrape wikipedia page
+```
+
+Back in 2014, [fivethiryeight.com](https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/) published an article on alcohol consumption in different countries. The data `drinks` is available as part of the `fivethirtyeight` package.
+
+```{r, load_alcohol_data}
+library(fivethirtyeight)
+data(drinks)
+
+```
+
+```{r glimpse_skim_data}
+skim(drinks)
+glimpse(drinks)
+
+```
+
+**Plot that shows the top 25 beer consuming countries**
+
+```{r beer_plot, warning=FALSE}
+drinks%>%
+  slice_max(order_by = beer_servings, n=25) %>%
+  ggplot(aes(x=beer_servings, y=fct_reorder(country, beer_servings), color = country))+
+  geom_col()+
+  labs(
+    title = "Top 25 beer consuming countries",
+    x = "Cans of beer consumed per person",
+    y = "Country"
+  ) +
+  NULL
+```
+
+**Plot that shows the top 25 wine consuming countries**
+
+```{r wine_plot, warning=FALSE}
+drinks %>%
+  slice_max(order_by = wine_servings, n=25) %>%
+  ggplot(aes(x=wine_servings, y=fct_reorder(country,wine_servings)))+
+  geom_col(fill='green')+
+  theme_bw()+
+  labs(
+    title = "Top 25 wine consuming countries",
+    subtitle = "",
+    x = "Glasses of wine consumed per person",
+    y = "Country"
+  )+
+
+  NULL
+
+```
+
+**Finally, A plot that shows the top 25 spirit consuming countries**
+
+```{r spirit_plot, warning=FALSE}
+drinks %>%
+  slice_max(order_by = spirit_servings, n=25) %>%
+  ggplot(aes(x=spirit_servings, y=fct_reorder(country,spirit_servings)))+
+  geom_col(fill='red')+
+  theme_bw()+
+  labs(
+    title = "Top 25 spirit consuming countries",
+    subtitle = "",
+    x = "Shots of spirit consumed per person",
+    y = "Country"
+  )+
+
+  NULL
+
+```
+
+

@@ -100,10 +100,10 @@ params:
         subtitle: Impact on Babies 
         title: Pregnancy and Smoking
         url: blogs/consequat
-      - image: pic06.jpg
-        subtitle: Feugiat Amet Tempus
-        title: Etiam
-        url: blogs/Etiam
+      - image: drinks.jpg
+        subtitle: Top 25
+        title: Beer, Wine & Spirits
+        url: blogs/etiam
   #two:
     #buttonText: Get Started
     #enable: yes
