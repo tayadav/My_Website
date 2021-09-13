@@ -92,9 +92,9 @@ params:
         subtitle: Biden's Popularity
         title: Joe Biden
         url: blogs/magna
-      - image: pic04.jpg
-        subtitle: Nisl Sed Aliquam
-        title: Ipsum
+      - image: worldhappiness.jpg
+        subtitle: Happiness Report
+        title: World Happiness 
         url: blogs/ipsum
       - image: pic05.jpg
         subtitle: Ipsum Dolor Sit Amet
