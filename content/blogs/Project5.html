@@ -181,9 +181,8 @@ data(drinks)</code></pre>
 <p><strong>Plot that shows the top 25 wine consuming countries</strong></p>
 <pre class="r"><code>drinks %&gt;%
   slice_max(order_by = wine_servings, n=25) %&gt;%
-  ggplot(aes(x=wine_servings, y=fct_reorder(country,wine_servings)))+
-  geom_col(fill=&#39;green&#39;)+
-  theme_bw()+
+  ggplot(aes(x=wine_servings, y=fct_reorder(country,wine_servings), color = country))+
+  geom_col()+
   labs(
     title = &quot;Top 25 wine consuming countries&quot;,
     subtitle = &quot;&quot;,
@@ -196,9 +195,8 @@ data(drinks)</code></pre>
 <p><strong>Finally, A plot that shows the top 25 spirit consuming countries</strong></p>
 <pre class="r"><code>drinks %&gt;%
   slice_max(order_by = spirit_servings, n=25) %&gt;%
-  ggplot(aes(x=spirit_servings, y=fct_reorder(country,spirit_servings)))+
-  geom_col(fill=&#39;red&#39;)+
-  theme_bw()+
+  ggplot(aes(x=spirit_servings, y=fct_reorder(country,spirit_servings), color = country))+
+  geom_col()+
   labs(
     title = &quot;Top 25 spirit consuming countries&quot;,
     subtitle = &quot;&quot;,
