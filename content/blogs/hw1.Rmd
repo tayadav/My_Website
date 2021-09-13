@@ -11,10 +11,24 @@ slug: tempus
 title: tempus
 ---
 
-In the assignment we analyzed data from the 2016 GSS sample data, using it to estimate values of population parameters of interest about US adults. The GSS sample data file has 2867 observations of 935 variables, but we are only interested in very few of these variables and we are using a smaller file.
+In the assignment I analyzed data from the 2016 GSS sample data, using it to estimate values of population parameters of interest about US adults. The GSS sample data file has 2867 observations of 935 variables, but I was only interested in very few of these variables and I am using a smaller file.
 
 The General Social Survey (GSS) gathers data on American society in order to monitor and explain trends in attitudes, behaviors, and attributes. Many trends have been tracked for decades, so one can see the evolution of attitudes, etc in American Society.
-```{r}
+```{r load-libraries}
+#loading libraries
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(lubridate)
+library(here)
+library(skimr)
+library(janitor)
+library(httr)
+library(readxl)
+library(vroom)
+```
+
+```{r  read_gss_data, cache=TRUE}
 #read data
 gss <- read_csv(here::here("data", "smallgss2016.csv"), 
                 na = c("", "Don't know",
@@ -23,7 +37,7 @@ gss <- read_csv(here::here("data", "smallgss2016.csv"),
 glimpse(gss)
 ```
 **Instagram and Snapchat, by sex**
-```{r}
+```{r Either Snapchat or Instagram}
 #Creating a new variable 'Snap_Insta'
 snap_insta <- gss %>%
   mutate(snap_insta = if_else(snapchat == "NA" & instagrm == "NA", "NA", 
@@ -32,7 +46,7 @@ snap_insta <- gss %>%
 snap_insta
 ```
 
-```{r}
+```{r Proportion of insta/snap users}
 #Calculating proportion of 'snap_insta' users
 snap_insta %>%
   filter(snap_insta != "NA") %>%

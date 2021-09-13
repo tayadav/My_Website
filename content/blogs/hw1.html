@@ -5,14 +5,240 @@ categories:
 date: "2017-10-31T22:26:09-05:00"
 description: Lorem Etiam Nullam
 draft: false
-image: connected world.jpg
+image: instasnap.jpg
 keywords: ""
 slug: tempus
 title: tempus
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
 
 
-<p>In the assignment we analyzed data from the 2016 GSS sample data, using it to estimate values of population parameters of interest about US adults. The GSS sample data file has 2867 observations of 935 variables, but we are only interested in very few of these variables and we are using a smaller file.</p>
+<p>In the assignment I analyzed data from the 2016 GSS sample data, using it to estimate values of population parameters of interest about US adults. The GSS sample data file has 2867 observations of 935 variables, but I was only interested in very few of these variables and I am using a smaller file.</p>
 <p>The General Social Survey (GSS) gathers data on American society in order to monitor and explain trends in attitudes, behaviors, and attributes. Many trends have been tracked for decades, so one can see the evolution of attitudes, etc in American Society.</p>
+<pre class="r"><code>#loading libraries
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+## ✓ tibble  3.1.2     ✓ dplyr   1.0.7
+## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
+## ✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(mosaic)</code></pre>
+<pre><code>## Warning: package &#39;mosaic&#39; was built under R version 4.1.1</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;mosaic&#39;:
+##   method                           from   
+##   fortify.SpatialPolygonsDataFrame ggplot2</code></pre>
+<pre><code>## 
+## The &#39;mosaic&#39; package masks several functions from core packages in order to add 
+## additional features.  The original behavior of these functions should not be affected by this.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;mosaic&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:Matrix&#39;:
+## 
+##     mean</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     count, do, tally</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     cross</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     stat</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,
+##     quantile, sd, t.test, var</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     max, mean, min, prod, range, sample, sum</code></pre>
+<pre class="r"><code>library(ggthemes)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;ggthemes&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:mosaic&#39;:
+## 
+##     theme_map</code></pre>
+<pre class="r"><code>library(lubridate)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     date, intersect, setdiff, union</code></pre>
+<pre class="r"><code>library(here)</code></pre>
+<pre><code>## here() starts at /Users/tani/Downloads/My_Website</code></pre>
+<pre class="r"><code>library(skimr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;skimr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:mosaic&#39;:
+## 
+##     n_missing</code></pre>
+<pre class="r"><code>library(janitor)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;janitor&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     chisq.test, fisher.test</code></pre>
+<pre class="r"><code>library(httr)
+library(readxl)
+library(vroom)</code></pre>
+<pre><code>## Warning: package &#39;vroom&#39; was built under R version 4.1.1</code></pre>
+<pre class="r"><code>#read data
+gss &lt;- read_csv(here::here(&quot;data&quot;, &quot;smallgss2016.csv&quot;), 
+                na = c(&quot;&quot;, &quot;Don&#39;t know&quot;,
+                       &quot;No answer&quot;, &quot;Not applicable&quot;))</code></pre>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   emailmin = col_character(),
+##   emailhr = col_character(),
+##   snapchat = col_character(),
+##   instagrm = col_character(),
+##   twitter = col_character(),
+##   sex = col_character(),
+##   degree = col_character()
+## )</code></pre>
+<pre class="r"><code>glimpse(gss)</code></pre>
+<pre><code>## Rows: 2,867
+## Columns: 7
+## $ emailmin &lt;chr&gt; &quot;0&quot;, &quot;30&quot;, &quot;NA&quot;, &quot;10&quot;, &quot;NA&quot;, &quot;0&quot;, &quot;0&quot;, &quot;NA&quot;, &quot;0&quot;, &quot;NA&quot;, &quot;0&quot;, …
+## $ emailhr  &lt;chr&gt; &quot;12&quot;, &quot;0&quot;, &quot;NA&quot;, &quot;0&quot;, &quot;NA&quot;, &quot;2&quot;, &quot;40&quot;, &quot;NA&quot;, &quot;0&quot;, &quot;NA&quot;, &quot;2&quot;, …
+## $ snapchat &lt;chr&gt; &quot;NA&quot;, &quot;No&quot;, &quot;No&quot;, &quot;NA&quot;, &quot;Yes&quot;, &quot;No&quot;, &quot;NA&quot;, &quot;Yes&quot;, &quot;NA&quot;, &quot;No&quot;,…
+## $ instagrm &lt;chr&gt; &quot;NA&quot;, &quot;No&quot;, &quot;No&quot;, &quot;NA&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;NA&quot;, &quot;Yes&quot;, &quot;NA&quot;, &quot;No&quot;…
+## $ twitter  &lt;chr&gt; &quot;NA&quot;, &quot;No&quot;, &quot;No&quot;, &quot;NA&quot;, &quot;No&quot;, &quot;No&quot;, &quot;NA&quot;, &quot;No&quot;, &quot;NA&quot;, &quot;No&quot;, &quot;…
+## $ sex      &lt;chr&gt; &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Female&quot;, &quot;Female&quot;, &quot;Female&quot;, &quot;Male&quot;,…
+## $ degree   &lt;chr&gt; &quot;Bachelor&quot;, &quot;High school&quot;, &quot;Bachelor&quot;, &quot;High school&quot;, &quot;Gradua…</code></pre>
+<p><strong>Instagram and Snapchat, by sex</strong></p>
+<pre class="r"><code>#Creating a new variable &#39;Snap_Insta&#39;
+snap_insta &lt;- gss %&gt;%
+  mutate(snap_insta = if_else(snapchat == &quot;NA&quot; &amp; instagrm == &quot;NA&quot;, &quot;NA&quot;, 
+                              if_else(snapchat==&quot;Yes&quot; | instagrm == &quot;Yes&quot;, &quot;Yes&quot;, &quot;No&quot;)))
+
+snap_insta</code></pre>
+<pre><code>## # A tibble: 2,867 x 8
+##    emailmin emailhr snapchat instagrm twitter sex    degree         snap_insta
+##    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt;     
+##  1 0        12      NA       NA       NA      Male   Bachelor       NA        
+##  2 30       0       No       No       No      Male   High school    No        
+##  3 NA       NA      No       No       No      Male   Bachelor       No        
+##  4 10       0       NA       NA       NA      Female High school    NA        
+##  5 NA       NA      Yes      Yes      No      Female Graduate       Yes       
+##  6 0        2       No       Yes      No      Female Junior college Yes       
+##  7 0        40      NA       NA       NA      Male   High school    NA        
+##  8 NA       NA      Yes      Yes      No      Female High school    Yes       
+##  9 0        0       NA       NA       NA      Male   High school    NA        
+## 10 NA       NA      No       No       No      Male   Junior college No        
+## # … with 2,857 more rows</code></pre>
+<pre class="r"><code>#Calculating proportion of &#39;snap_insta&#39; users
+snap_insta %&gt;%
+  filter(snap_insta != &quot;NA&quot;) %&gt;%
+  summarize(
+    Proportion_Insta_Snap = count(snap_insta ==&quot;Yes&quot;)/ n())</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   Proportion_Insta_Snap
+##                   &lt;dbl&gt;
+## 1                 0.375</code></pre>
+<pre class="r"><code># CI for Male population
+male_proportion &lt;- snap_insta %&gt;%
+  filter(sex == &quot;Male&quot;, snap_insta != &quot;NA&quot;) %&gt;%
+  summarize(
+    proportion = count(snap_insta == &quot;Yes&quot;)/n(),
+    se = sqrt((proportion*(1 - proportion)/n())),
+    lower_ci = proportion - 1.96*se, #we are using normal distribution to approximate
+                                     #binomial distribution and directly use 1.96 as the critical value
+    upper_ci = proportion + 1.96*se) %&gt;% 
+  knitr::kable(caption = &quot;95% CI for men who used either Snapchat or Instagram&quot;) %&gt;%
+  kableExtra::kable_styling()
+
+# CI for Female population
+female_proportion &lt;- snap_insta %&gt;%
+  filter(sex == &quot;Female&quot;, snap_insta != &quot;NA&quot;) %&gt;%
+  summarize(
+    proportion = count(snap_insta == &quot;Yes&quot;)/n(),
+    se = sqrt((proportion*(1 - proportion)/n())),
+    lower_ci = proportion - 1.96*se,
+    upper_ci = proportion + 1.96*se) %&gt;% 
+  knitr::kable(caption = &quot;95% CI for women who used either Snapchat or Instagram&quot;) %&gt;%
+  kableExtra::kable_styling()
+
+#print
+male_proportion</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+(#tab:Proportion of insta/snap users)95% CI for men who used either Snapchat or Instagram
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+proportion
+</th>
+<th style="text-align:right;">
+se
+</th>
+<th style="text-align:right;">
+lower_ci
+</th>
+<th style="text-align:right;">
+upper_ci
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.318408
+</td>
+<td style="text-align:right;">
+0.0189712
+</td>
+<td style="text-align:right;">
+0.2812243
+</td>
+<td style="text-align:right;">
+0.3555916
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>female_proportion</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+(#tab:Proportion of insta/snap users)95% CI for women who used either Snapchat or Instagram
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+proportion
+</th>
+<th style="text-align:right;">
+se
+</th>
+<th style="text-align:right;">
+lower_ci
+</th>
+<th style="text-align:right;">
+upper_ci
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.4187256
+</td>
+<td style="text-align:right;">
+0.0177907
+</td>
+<td style="text-align:right;">
+0.3838559
+</td>
+<td style="text-align:right;">
+0.4535953
+</td>
+</tr>
+</tbody>
+</table>
