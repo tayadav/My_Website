@@ -96,14 +96,14 @@ params:
         subtitle: Happiness Report
         title: World Happiness 
         url: blogs/ipsum
-      - image: pic05.jpg
-        subtitle: Ipsum Dolor Sit Amet
-        title: Consequat
-        url: blogs/ipsum
+      - image: smoking.jpg
+        subtitle: Impact on Babies 
+        title: Pregnancy and Smoking
+        url: blogs/consequat
       - image: pic06.jpg
         subtitle: Feugiat Amet Tempus
         title: Etiam
-        url: blogs/ipsum
+        url: blogs/Etiam
   #two:
     #buttonText: Get Started
     #enable: yes

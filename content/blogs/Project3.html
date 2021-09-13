@@ -18,11 +18,11 @@ title: Happiness
 <pre class="r"><code># Download data to temporary file
 httr::GET(url, write_disk(happiness.temp &lt;- tempfile(fileext = &quot;.xls&quot;)))</code></pre>
 <pre><code>## Response [https://happiness-report.s3.amazonaws.com/2021/DataPanelWHR2021C2.xls]
-##   Date: 2021-09-13 18:41
+##   Date: 2021-09-13 18:49
 ##   Status: 200
 ##   Content-Type: application/vnd.ms-excel
 ##   Size: 435 kB
-## &lt;ON DISK&gt;  /var/folders/1k/wft4clgd33qdzxt_l3hlsfqh0000gn/T//Rtmpl7ew62/filed1651047a07.xls</code></pre>
+## &lt;ON DISK&gt;  /var/folders/1k/wft4clgd33qdzxt_l3hlsfqh0000gn/T//RtmpzDGI7D/filedb8ce6c8a5.xls</code></pre>
 <pre class="r"><code># Using read_excel to read it as dataframe
 world_happiness &lt;- read_excel(happiness.temp,
                     sheet = &quot;Sheet1&quot;,
@@ -51,7 +51,7 @@ world_happiness_19 &lt;- world_happiness %&gt;%
 world_happiness_19 %&gt;% 
   select(-c(country_name,year)) %&gt;% 
   ggpairs(alpha = 0.3)</code></pre>
-<p><img src="/blogs/tani_files/figure-html/plotting%20graph-1.png" width="672" /></p>
+<p><img src="/blogs/Project3_files/figure-html/plotting%20graph-1.png" width="672" /></p>
 <pre class="r"><code># Summary statistics for life_ladder, a measure of happiness score
 world_happiness_19 %&gt;% 
   select(life_ladder) %&gt;% 

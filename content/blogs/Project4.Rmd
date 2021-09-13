@@ -1,0 +1,107 @@
+---
+categories:
+- ""
+- ""
+date: "2017-10-31T22:26:09-05:00"
+description: fhhfushfihsijdhwhdiwhdi
+draft: false
+image: cig.jpg
+keywords: ""
+slug: consequat
+title: Smoking and Birth Weight
+---
+
+```{r load package, warning=FALSE, message=FALSE,echo=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(GGally)
+library(here)
+library(skimr)
+library(janitor)
+library(broom)
+library(huxtable)
+```
+
+**Relationship between birth weight and mother's smoking habit**
+
+
+```{r}
+# import the data set
+smoking_birth_weight <- read_csv(here::here("data", "smoking_birth_weight.csv"))
+```
+
+
+```{r skimming data, warning=FALSE,echo=FALSE}
+skimr::skim(smoking_birth_weight)
+```
+
+```{r smokers vs non smokers, warning=FALSE}
+smoking_birth_weight %>% 
+  count(habit, sort=TRUE) %>% 
+  mutate(proportion = n/sum(n))
+```
+
+
+
+
+```{r descriptive Statistics,warning=FALSE}
+favstats(weight_kg ~ habit, data = smoking_birth_weight)
+```
+*The mean difference in weight is 144gm (3.244 - 3.100)*
+
+
+# write down, by hand, the two CIs
+
+```{r Confidence Interval, warning=FALSE}
+t.test(weight_kg ~ habit, data = smoking_birth_weight)
+```
+
+```{r ggpairs, warning=FALSE}
+smoking_birth_weight %>% 
+  filter(!is.na(habit)) %>% 
+  select(weight_kg, habit ) %>% 
+  ggpairs()+
+  theme_bw()
+```
+
+**Model building**
+
+
+```{r buliding models}
+favstats(~weight_kg, data = smoking_birth_weight)
+
+model1 <- lm(weight_kg ~ 1, data= smoking_birth_weight)
+msummary(model1)
+
+model2 <- lm(weight_kg ~ weeks, data= smoking_birth_weight)
+msummary(model2)
+
+model3 <- lm(weight_kg ~ weeks + marital, data= smoking_birth_weight)
+msummary(model3)
+
+model4 <- lm(weight_kg ~ weeks + marital + habit, data= smoking_birth_weight)
+msummary(model4)
+
+model5 <- lm(weight_kg ~ weeks + marital + habit + whitemom + gender + gained, data= smoking_birth_weight)
+msummary(model5)
+
+model6 <- lm(weight_kg ~ . , data= smoking_birth_weight)
+msummary(model6)
+
+```
+
+```{r table comparing models, warning=FALSE}
+huxreg(model1, model2, model3, model4, model5, model6,
+       statistics = c('#observations' = 'nobs', 
+                      'R squared' = 'r.squared', 
+                      'Adj. R Squared' = 'adj.r.squared', 
+                      'Residual SE' = 'sigma'), 
+       bold_signif = 0.05, 
+       stars = NULL
+) %>% 
+  set_caption('Comparison of models')
+```
+
+
+
+
