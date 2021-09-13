@@ -5,10 +5,10 @@ categories:
 date: "2017-10-31T22:26:09-05:00"
 description: Lorem Etiam Nullam
 draft: false
-image: instasnap.jpg
+image: instasnap.jpeg
 keywords: ""
 slug: tempus
-title: tempus
+title: Social Media
 ---
 
 In the assignment I analyzed data from the 2016 GSS sample data, using it to estimate values of population parameters of interest about US adults. The GSS sample data file has 2867 observations of 935 variables, but I was only interested in very few of these variables and I am using a smaller file.
