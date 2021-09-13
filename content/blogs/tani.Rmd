@@ -47,20 +47,25 @@ glimpse(world_happiness)
 
 ```
 
-# produce scatterplot-correlation matrix for 2019 using GGally::ggpairs()
+```{r}
+# Scatterplot-correlation matrix for 2019 using GGally::ggpairs()
 world_happiness_19 <- world_happiness %>%
   filter(year==2019) 
 
 world_happiness_19 %>% 
   select(-c(country_name,year)) %>% 
   ggpairs(alpha = 0.3)
+```
 
-
-# produce summary statistics for life_ladder, a measure of happiness score
+```{r}
+# Summary statistics for life_ladder, a measure of happiness score
 world_happiness_19 %>% 
   select(life_ladder) %>% 
   skim()
+```
 
+
+```{r}
 # fit 3 models, with model1 being just the average happiness
 model1 <- lm(life_ladder ~ 1, data = world_happiness_19)
 mosaic::msummary(model1)
@@ -102,4 +107,8 @@ huxreg(model1, model2, model3, model4,model5,
 car::vif(model3)
 car::vif(model4)
 car::vif(model5)
+
+```
+
+
 
