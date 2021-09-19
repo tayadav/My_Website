@@ -11,7 +11,7 @@ params:
       Welcome to my website. I'll be sharing a little bit about myself and a lot about my work
     title: Hi, My name is Tanisha 
   blog: {}
-  contact:https://formspree.io/f/mnqlwbny
+  contact:
     address:
       - city: London, ST NW1 5AH
         country: United Kingdom
