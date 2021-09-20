@@ -31,13 +31,11 @@ Back in 2014, [fivethiryeight.com](https://fivethirtyeight.com/features/dear-mon
 ```{r, load_alcohol_data}
 library(fivethirtyeight)
 data(drinks)
-
 ```
 
 ```{r glimpse_skim_data}
 skim(drinks)
 glimpse(drinks)
-
 ```
 
 After cleaning the data I decided to use bar plots to look at the consumption of the top drinking countries. I used the ggplot package to produce the following graphs. Below you can see the three graphs for the top 25 beer, wine and spirit drinking countries:
