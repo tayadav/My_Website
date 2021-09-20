@@ -12,6 +12,7 @@ title: Beer, Wine and Spirits
 ---
 
 ### Loading Libraries 
+
 ```{r load-libraries, warning=FALSE, message=FALSE, echo=FALSE}
 library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
 library(mosaic)
@@ -25,7 +26,6 @@ library(vroom)
 library(tidyquant)
 library(rvest) # to scrape wikipedia page
 ```
-
 Back in 2014, [fivethiryeight.com](https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/) published an article on alcohol consumption in different countries. The data `drinks` is available as part of the `fivethirtyeight` package. So, let's have a look at the data we have:
 
 ```{r, load_alcohol_data}
