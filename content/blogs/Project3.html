@@ -14,15 +14,17 @@ title: Happiness
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
+<p>Like always, I’ll start this project too with loading the required libraries:</p>
 <pre class="r"><code>url &lt;- &quot;https://happiness-report.s3.amazonaws.com/2021/DataPanelWHR2021C2.xls&quot;</code></pre>
 <pre class="r"><code># Download data to temporary file
 httr::GET(url, write_disk(happiness.temp &lt;- tempfile(fileext = &quot;.xls&quot;)))</code></pre>
 <pre><code>## Response [https://happiness-report.s3.amazonaws.com/2021/DataPanelWHR2021C2.xls]
-##   Date: 2021-09-13 18:49
+##   Date: 2021-09-20 19:48
 ##   Status: 200
 ##   Content-Type: application/vnd.ms-excel
 ##   Size: 435 kB
-## &lt;ON DISK&gt;  /var/folders/1k/wft4clgd33qdzxt_l3hlsfqh0000gn/T//RtmpzDGI7D/filedb8ce6c8a5.xls</code></pre>
+## &lt;ON DISK&gt;  /var/folders/1k/wft4clgd33qdzxt_l3hlsfqh0000gn/T//Rtmp9OoYov/file276d52deb01f.xls</code></pre>
+<p>Before starting with our statistocs and regression models, lets just have a look at our data:</p>
 <pre class="r"><code># Using read_excel to read it as dataframe
 world_happiness &lt;- read_excel(happiness.temp,
                     sheet = &quot;Sheet1&quot;,
@@ -44,6 +46,7 @@ glimpse(world_happiness)</code></pre>
 ## $ perceptions_of_corruption        &lt;dbl&gt; 0.8816863, 0.8500354, 0.7067661, 0.73…
 ## $ positive_affect                  &lt;dbl&gt; 0.5176372, 0.5839256, 0.6182655, 0.61…
 ## $ negative_affect                  &lt;dbl&gt; 0.2581955, 0.2370924, 0.2753238, 0.26…</code></pre>
+<p>I have used ggparis to analyze the correlation between dependent and explanatory variables:</p>
 <pre class="r"><code># Scatterplot-correlation matrix for 2019 using GGally::ggpairs()
 world_happiness_19 &lt;- world_happiness %&gt;%
   filter(year==2019) 
@@ -126,6 +129,7 @@ world_happiness_19 %&gt;%
 </tr>
 </tbody>
 </table>
+<p><em>Regression Models</em></p>
 <pre class="r"><code># fit 3 models, with model1 being just the average happiness
 model1 &lt;- lm(life_ladder ~ 1, data = world_happiness_19)
 mosaic::msummary(model1)</code></pre>
@@ -182,7 +186,7 @@ mosaic::msummary(model5)</code></pre>
 ##   (9 observations deleted due to missingness)
 ## Multiple R-squared:  0.7202, Adjusted R-squared:  0.7116 
 ## F-statistic: 83.65 on 4 and 130 DF,  p-value: &lt; 2.2e-16</code></pre>
-<pre class="r"><code># if you want regression summary in tibble format, use broom::tidy() and broom::glance()
+<pre class="r"><code># if we want regression summary in tibble format, use broom::tidy() and broom::glance()
 # get model summary and R2, etc for both models
 model2 %&gt;% broom::tidy(conf.int = TRUE)</code></pre>
 <table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:creating models">

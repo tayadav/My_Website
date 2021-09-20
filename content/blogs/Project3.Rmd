@@ -11,6 +11,7 @@ slug: ipsum
 title: Happiness
 ---
 
+Like always, I'll start this project too with loading the required libraries:
 
 ```{r load-libraries, warning=FALSE,message=FALSE,echo=FALSE}
 library(tidyverse)
@@ -36,6 +37,7 @@ url <- "https://happiness-report.s3.amazonaws.com/2021/DataPanelWHR2021C2.xls"
 httr::GET(url, write_disk(happiness.temp <- tempfile(fileext = ".xls")))
 ```
 
+Before starting with our statistocs and regression models, lets just have a look at our data:
 
 ```{r read csv, warning=FALSE}
 # Using read_excel to read it as dataframe
@@ -48,6 +50,8 @@ world_happiness <- read_excel(happiness.temp,
 glimpse(world_happiness)
 
 ```
+
+I have used ggparis to analyze the correlation between dependent and explanatory variables:
 
 ```{r plotting graph, warning=FALSE}
 # Scatterplot-correlation matrix for 2019 using GGally::ggpairs()
@@ -66,6 +70,7 @@ world_happiness_19 %>%
   skim()
 ```
 
+*Regression Models*
 
 ```{r creating models, warning=FALSE}
 # fit 3 models, with model1 being just the average happiness
@@ -85,7 +90,7 @@ model5 <- lm(life_ladder ~ log_gdp_per_capita + healthy_life_expectancy_at_birth
 mosaic::msummary(model5)
 
 
-# if you want regression summary in tibble format, use broom::tidy() and broom::glance()
+# if we want regression summary in tibble format, use broom::tidy() and broom::glance()
 # get model summary and R2, etc for both models
 model2 %>% broom::tidy(conf.int = TRUE)
 model2 %>% broom::glance()
