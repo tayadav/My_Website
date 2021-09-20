@@ -18,75 +18,19 @@ title: Social Media
 
 <p>In the assignment I analyzed data from the 2016 GSS sample data, using it to estimate values of population parameters of interest about US adults. The GSS sample data file has 2867 observations of 935 variables, but I was only interested in very few of these variables and I am using a smaller file.</p>
 <p>The General Social Survey (GSS) gathers data on American society in order to monitor and explain trends in attitudes, behaviors, and attributes. Many trends have been tracked for decades, so one can see the evolution of attitudes, etc in American Society.</p>
+<p>Let’s first load the libraries which we will need to work on this assignment:</p>
 <pre class="r"><code>#loading libraries
-library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
-<pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-## ✓ tibble  3.1.2     ✓ dplyr   1.0.7
-## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
-## ✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(mosaic)</code></pre>
-<pre><code>## Warning: package &#39;mosaic&#39; was built under R version 4.1.1</code></pre>
-<pre><code>## Registered S3 method overwritten by &#39;mosaic&#39;:
-##   method                           from   
-##   fortify.SpatialPolygonsDataFrame ggplot2</code></pre>
-<pre><code>## 
-## The &#39;mosaic&#39; package masks several functions from core packages in order to add 
-## additional features.  The original behavior of these functions should not be affected by this.</code></pre>
-<pre><code>## 
-## Attaching package: &#39;mosaic&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:Matrix&#39;:
-## 
-##     mean</code></pre>
-<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
-## 
-##     count, do, tally</code></pre>
-<pre><code>## The following object is masked from &#39;package:purrr&#39;:
-## 
-##     cross</code></pre>
-<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
-## 
-##     stat</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,
-##     quantile, sd, t.test, var</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     max, mean, min, prod, range, sample, sum</code></pre>
-<pre class="r"><code>library(ggthemes)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;ggthemes&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:mosaic&#39;:
-## 
-##     theme_map</code></pre>
-<pre class="r"><code>library(lubridate)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;lubridate&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     date, intersect, setdiff, union</code></pre>
-<pre class="r"><code>library(here)</code></pre>
-<pre><code>## here() starts at /Users/tani/Downloads/My_Website</code></pre>
-<pre class="r"><code>library(skimr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;skimr&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:mosaic&#39;:
-## 
-##     n_missing</code></pre>
-<pre class="r"><code>library(janitor)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;janitor&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     chisq.test, fisher.test</code></pre>
-<pre class="r"><code>library(httr)
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(lubridate)
+library(here)
+library(skimr)
+library(janitor)
+library(httr)
 library(readxl)
 library(vroom)</code></pre>
-<pre><code>## Warning: package &#39;vroom&#39; was built under R version 4.1.1</code></pre>
+<p>I prefer to first to look at the data before starting with my analysis:</p>
 <pre class="r"><code>#read data
 gss &lt;- read_csv(here::here(&quot;data&quot;, &quot;smallgss2016.csv&quot;), 
                 na = c(&quot;&quot;, &quot;Don&#39;t know&quot;,
@@ -113,6 +57,8 @@ gss &lt;- read_csv(here::here(&quot;data&quot;, &quot;smallgss2016.csv&quot;),
 ## $ sex      &lt;chr&gt; &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Female&quot;, &quot;Female&quot;, &quot;Female&quot;, &quot;Male&quot;,…
 ## $ degree   &lt;chr&gt; &quot;Bachelor&quot;, &quot;High school&quot;, &quot;Bachelor&quot;, &quot;High school&quot;, &quot;Gradua…</code></pre>
 <p><strong>Instagram and Snapchat, by sex</strong></p>
+<p>These are the relevant steps to calculate the population proportion of Snapchat or Instagram users in 2016:</p>
+<p>Create a new variable, snap_insta that is Yes if the respondent reported using any of Snapchat (snapchat) or Instagram (instagrm), and No if not. For reported NA values, the value in the new created variable is also NA.</p>
 <pre class="r"><code>#Creating a new variable &#39;Snap_Insta&#39;
 snap_insta &lt;- gss %&gt;%
   mutate(snap_insta = if_else(snapchat == &quot;NA&quot; &amp; instagrm == &quot;NA&quot;, &quot;NA&quot;, 
@@ -133,6 +79,7 @@ snap_insta</code></pre>
 ##  9 0        0       NA       NA       NA      Male   High school    NA        
 ## 10 NA       NA      No       No       No      Male   Junior college No        
 ## # … with 2,857 more rows</code></pre>
+<p>2.Calculate the proportion of Yes’s for snap_insta among those who answered the question, i.e. excluding NAs.</p>
 <pre class="r"><code>#Calculating proportion of &#39;snap_insta&#39; users
 snap_insta %&gt;%
   filter(snap_insta != &quot;NA&quot;) %&gt;%
@@ -142,6 +89,9 @@ snap_insta %&gt;%
 ##   Proportion_Insta_Snap
 ##                   &lt;dbl&gt;
 ## 1                 0.375</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Using the CI formula for proportions and thus constructing 95% CIs for men and women who used either Snapchat or Instagram</li>
+</ol>
 <pre class="r"><code># CI for Male population
 male_proportion &lt;- snap_insta %&gt;%
   filter(sex == &quot;Male&quot;, snap_insta != &quot;NA&quot;) %&gt;%
@@ -169,7 +119,7 @@ female_proportion &lt;- snap_insta %&gt;%
 male_proportion</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-(#tab:Proportion of insta/snap users)95% CI for men who used either Snapchat or Instagram
+(#tab:calculating 95% CI)95% CI for men who used either Snapchat or Instagram
 </caption>
 <thead>
 <tr>
@@ -207,7 +157,7 @@ upper_ci
 <pre class="r"><code>female_proportion</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-(#tab:Proportion of insta/snap users)95% CI for women who used either Snapchat or Instagram
+(#tab:calculating 95% CI)95% CI for women who used either Snapchat or Instagram
 </caption>
 <thead>
 <tr>
@@ -242,3 +192,4 @@ upper_ci
 </tr>
 </tbody>
 </table>
+<p>Looking at the 95% CI for both men and women, we can conclude that there is no overlap between them. However, we can see portions of female using either snapchat or insta is more compared to that of women.</p>

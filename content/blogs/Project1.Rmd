@@ -30,7 +30,6 @@ library(httr)
 library(readxl)
 library(vroom)
 ```
-
 I prefer to first to look at the data before starting with my analysis:
 
 ```{r  read_gss_data, cache=TRUE}
