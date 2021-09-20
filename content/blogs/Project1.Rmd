@@ -65,7 +65,6 @@ snap_insta %>%
   summarize(
     Proportion_Insta_Snap = count(snap_insta =="Yes")/ n())
 ```
-
 3. Using the CI formula for proportions and thus constructing 95% CIs for men and women who used either Snapchat or Instagram
 
 ```{r calculating 95% CI}
@@ -97,6 +96,6 @@ male_proportion
 female_proportion
 ```
 
-Looking at the 95% CI for both men and women, we can conclude that there is no overlap between them. However, we can see portions of female using either snapchat or insta is more compared to that of women.
+Looking at the 95% CI for both men and women, we can conclude that there is no overlap between them. However, we can see portions of female using either snapchat or insta is more compared to that of women.\n
 
 

@@ -24,7 +24,6 @@ library(huxtable)
 
 **Relationship between birth weight and mother's smoking habit**
 
-
 ```{r}
 # import the data set
 smoking_birth_weight <- read_csv(here::here("data", "smoking_birth_weight.csv"))
