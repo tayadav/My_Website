@@ -56,7 +56,7 @@ drinks%>%
   ) +
   NULL
 ```
-It is certainly no surprise that people in Czech are among the most beer-consuming countries, but Namibia is a little surprising with about 370 yearly beer cans consumed per person. That implies every person drinks on average about 1 beer per day. However, Namibia is a German colony and therefore has adopted the German Beer drinking traditions. A little surprising is the fact that Germany didn’t make it into the Top 3, but Gabon has.
+It is certainly no surprise that people in Czech are among the most beer-consuming countries, but Namibia is a little surprising with about 370 yearly beer cans consumed per person. That implies every person drinks on average about 1 beer per day. However, Namibia is a German colony and therefore has adopted the German Beer drinking traditions. A little surprising is the fact that Germany didn’t make it into the Top 3, but Gabon has.\n
 
 **Plot that shows the top 25 wine consuming countries**
 
@@ -75,7 +75,7 @@ drinks %>%
   NULL
 
 ```
-Regarding wine consumption, it is no surprise that people in France are the heaviest consumers having several world famous wineries. The average consumption is about 370 glasses of wine per person per year.
+Regarding wine consumption, it is no surprise that people in France are the heaviest consumers having several world famous wineries. The average consumption is about 370 glasses of wine per person per year.\n
 
 **Finally, A plot that shows the top 25 spirit consuming countries**
 
