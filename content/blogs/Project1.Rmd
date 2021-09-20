@@ -17,7 +17,7 @@ The General Social Survey (GSS) gathers data on American society in order to mon
 
 Let's first load the libraries which we will need to work on this assignment: 
 
-```{r load-libraries}
+```{r load-libraries, warning=FALSE}
 #loading libraries
 library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
 library(mosaic)
