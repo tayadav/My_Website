@@ -10,6 +10,7 @@ keywords: ""
 slug: magna
 title: US Elections
 ---
+
 **Biden's Approval Margins**
 This assignment involves analyzing the poll approval for the US president. Here, I'll again start by loading the libraries which I might need to do my analysis: and a bit of cleaning the data: 
 
