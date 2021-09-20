@@ -21,7 +21,7 @@ params:
     buttonSend: Send message
     email:
       - email: tyadav.mam2022@london.edu
-        title: Email
+        title: Email 
     enable: yes
     phone:
       - phone: (+44) 7880333618
