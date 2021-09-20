@@ -11,6 +11,7 @@ slug: magna
 title: US Elections
 ---
 **Biden's Approval Margins**
+This assignment involves analyzing the poll approval for the US president. Here, I'll again start by loading the libraries which I might need to do my analysis: and a bit of cleaning the data: 
 
 ```{r load-libraries, include=FALSE}
 library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
@@ -89,3 +90,20 @@ ggplot(net_approval,
   scale_y_continuous(breaks=seq(-15,10,2.5))
 
 ```
+
+## Compare Confidence Intervals
+
+Compare the confidence intervals for `week 4` and `week 25`. 
+
+```{r}
+net_approval_4_25 <- net_approval %>% 
+  filter(week %in% c(4, 25)) %>% 
+  mutate(
+    ci_width = upper_ci - lower_ci) %>% 
+  select(subgroup, week, lower_ci, upper_ci, ci_width)
+
+net_approval_4_25
+  
+```
+
+From the results, I can clearly see that for all subgroups, the confidence interval for Biden's net approval rate has been narrower from week 4 to week 25. Especially for Voters subgroup, the width confidence interval has been drastically decreased from 16.84 to 6.85. I assume this is because as after Biden has been elected for a longer period of time in week 25 (almost half a year), all adults including his voters would become more clear about their approval or disapproval to the president. After Americans took over 25-week time to evaluate their new elected president, they would probably have a clearer attitude towards Biden's policy changes, administration and national strategies. These clearer perceptions then result in this decreasing confidence interval trend.

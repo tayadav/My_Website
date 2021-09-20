@@ -24,7 +24,7 @@ library(tidyquant)
 library(rvest) # to scrape wikipedia page
 ```
 
-Back in 2014, [fivethiryeight.com](https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/) published an article on alcohol consumption in different countries. The data `drinks` is available as part of the `fivethirtyeight` package.
+Back in 2014, [fivethiryeight.com](https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/) published an article on alcohol consumption in different countries. The data `drinks` is available as part of the `fivethirtyeight` package. So, let's have a look at the data we have:
 
 ```{r, load_alcohol_data}
 library(fivethirtyeight)
@@ -37,6 +37,8 @@ skim(drinks)
 glimpse(drinks)
 
 ```
+
+After cleaning the data I decided to use bar plots to look at the consumption of the top drinking countries. I used the ggplot package to produce the following graphs. Below you can see the three graphs for the top 25 beer, wine and spirit drinking countries:
 
 **Plot that shows the top 25 beer consuming countries**
 
@@ -52,6 +54,7 @@ drinks%>%
   ) +
   NULL
 ```
+It is certainly no surprise that people in Czech are among the most beer-consuming countries, but Namibia is a little surprising with about 370 yearly beer cans consumed per person. That implies every person drinks on average about 1 beer per day. However, Namibia is a German colony and therefore has adopted the German Beer drinking traditions. A little surprising is the fact that Germany didn’t make it into the Top 3, but Gabon has.
 
 **Plot that shows the top 25 wine consuming countries**
 
@@ -70,6 +73,7 @@ drinks %>%
   NULL
 
 ```
+Regarding wine consumption, it is no surprise that people in France are the heaviest consumers having several world famous wineries. The average consumption is about 370 glasses of wine per person per year.
 
 **Finally, A plot that shows the top 25 spirit consuming countries**
 
@@ -88,5 +92,7 @@ drinks %>%
   NULL
 
 ```
+Last but not least, Russia and Belarus are no surprise to be placed in the Top 3 spirit consumers with their popularity for drinking vodka, with about 370 and 320 shots of spirit consumed per person, respectively. A bit more interesting is Grenada leading the table, with approximately 430 servings per person, but a Caribbean country like itself probably has the right environment for a lot of rum drinking on the beach.
 
+In general, we can see that more than half of the top 25 beer and wine drinking countries come from Europe which are countries that tend to be more developed and have a higher GDP. In comparison, top spirit drinking countries tend to be more developing countries such as Grenada and Haiti. This may be explained by the fact that wine and beer are more expensive to purchase than spirits thus people in developing countries opt for cheaper alternatives when it comes to drinking. Furthermore, such national or continental differences in alcohol tastes could also be explained by the national availability of the ingredients to make this alcohol. For France, there has been enormous productions of grapes every year for manufacturing wine. For Germany, barley has been one of their main crops, which is then used for beer fermenting. For Japan and China, rice, their main crop, has been widely used to produce spirits. Moreover, these differences in tastes have also been preserved by many local traditions, customs and national culture.
 
