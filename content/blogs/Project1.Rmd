@@ -11,13 +11,13 @@ slug: tempus
 title: Social Media
 ---
 
-In the assignment I analyzed data from the 2016 GSS sample data, using it to estimate values of population parameters of interest about US adults. The GSS sample data file has 2867 observations of 935 variables, but I was only interested in very few of these variables and I am using a smaller file.
+In the assignment I analyzed data from the 2016 GSS sample data, using it to estimate values of population parameters of interest about US adults. The GSS sample data file has 2867 observations of 935 variables, but I was only interested in very few of these variables and I am using a smaller file.\n
 
-The General Social Survey (GSS) gathers data on American society in order to monitor and explain trends in attitudes, behaviors, and attributes. Many trends have been tracked for decades, so one can see the evolution of attitudes, etc in American Society.
+The General Social Survey (GSS) gathers data on American society in order to monitor and explain trends in attitudes, behaviors, and attributes. Many trends have been tracked for decades, so one can see the evolution of attitudes, etc in American Society.\n
 
 Let's first load the libraries which we will need to work on this assignment: 
 
-```{r load-libraries, warning=FALSE}
+```{r load-libraries, warning=FALSE, message=FALSE}
 #loading libraries
 library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
 library(mosaic)
