@@ -11,6 +11,8 @@ slug: consequat
 title: Smoking and Birth Weight
 ---
 
+Let's first load the libraries which we will need to work on this assignment:
+
 ```{r load package, warning=FALSE, message=FALSE,echo=FALSE}
 library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
 library(mosaic)

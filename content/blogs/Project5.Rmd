@@ -11,6 +11,8 @@ slug: etiam
 title: Beer, Wine and Spirits
 ---
 
+Let's first load the libraries which we will need to work on this assignment:
+
 ```{r load-libraries, warning=FALSE, message=FALSE, echo=FALSE}
 library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
 library(mosaic)

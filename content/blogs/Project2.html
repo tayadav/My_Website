@@ -15,6 +15,7 @@ title: US Elections
 
 
 <p><strong>Biden’s Approval Margins</strong></p>
+<p>This assignment involves analyzing the poll approval for the US president. Here, I’ll again start by loading the libraries which I might need to do my analysis: and a bit of cleaning the data:</p>
 <pre class="r"><code># Imported approval polls data directly off fivethirtyeight website
 approval_polllist &lt;- read_csv(&#39;https://projects.fivethirtyeight.com/biden-approval-data/approval_polllist.csv&#39;) </code></pre>
 <pre><code>## 
@@ -110,3 +111,25 @@ ggplot(net_approval,
   scale_y_continuous(breaks=seq(-15,10,2.5))</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="/blogs/Project2_files/figure-html/Biden%20net%20approval%20rate%20plot-1.png" width="1344" style="display: block; margin: auto;" /></p>
+<div id="compare-confidence-intervals" class="section level2">
+<h2>Compare Confidence Intervals</h2>
+<p>Compare the confidence intervals for <code>week 4</code> and <code>week 25</code>.</p>
+<pre class="r"><code>net_approval_4_25 &lt;- net_approval %&gt;% 
+  filter(week %in% c(4, 25)) %&gt;% 
+  mutate(
+    ci_width = upper_ci - lower_ci) %&gt;% 
+  select(subgroup, week, lower_ci, upper_ci, ci_width)
+
+net_approval_4_25</code></pre>
+<pre><code>## # A tibble: 6 x 5
+## # Groups:   subgroup [3]
+##   subgroup   week lower_ci upper_ci ci_width
+##   &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Adults        4    21.4      24.4     3.02
+## 2 Adults       25    12.0      16.5     4.57
+## 3 All polls     4    14.0      24.2    10.2 
+## 4 All polls    25     8.57     13.7     5.08
+## 5 Voters        4     5.92     28.0    22.1 
+## 6 Voters       25     3.61     10.5     6.85</code></pre>
+<p>From the results, I can clearly see that for all subgroups, the confidence interval for Biden’s net approval rate has been narrower from week 4 to week 25. Especially for Voters subgroup, the width confidence interval has been drastically decreased from 16.84 to 6.85. I assume this is because as after Biden has been elected for a longer period of time in week 25 (almost half a year), all adults including his voters would become more clear about their approval or disapproval to the president. After Americans took over 25-week time to evaluate their new elected president, they would probably have a clearer attitude towards Biden’s policy changes, administration and national strategies. These clearer perceptions then result in this decreasing confidence interval trend.</p>
+</div>
